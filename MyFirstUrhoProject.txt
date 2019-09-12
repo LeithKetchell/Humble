@@ -1,0 +1,67 @@
+Instructions for setting up a new codeblocks project for Urho3D c++ applications:
+
+Go to "Project/Build Options"
+On the left hand side, select your project name (rather than debug or release)
+because the changes we will make apply to both debug and release...
+
+Click on "Search Directories.
+With "Compiler" tab enabled (default I believe), click the "Add" button (near bottom of window)
+Click the button with three little dots "..." and locate your "UrhoBuild/Source" folder.. add that path.
+Done?
+Add a second search path: "UrhoBuild/Source/ThirdParty".
+Done?
+
+Now click on "Linker Settings"... make sure youur project name is still selected on left hand side for "global settings"!!!
+Click "Add", and surf to your "UrhoBuild/lib" folder - select your "libUrho3D.lib" file (for linux its typically libUrho3D.a)
+At this point, the linker settings for windows and linux will vary...
+I'll spell out the linux settings, and we'll work out the settings for Windows and document them later.
+I needed to add two more libs: "/lib/x86_64-linux-gnu/libdl-2.27.so" and "/usr/lib/x86_64-linux-gnu/libGL.so"
+You'll need to add, at least, "opengl32.lib" and "glu32.lib"
+
+On the right hand side, I required the following "other linker options":
+-pthread
+-ldl
+-lGL
+-lGLU
+-lGLEW
+
+I'm not certain what you'll need there for Windows, we'll find out soon enough!
+Shut the Project Build Options dialog.
+
+Before doing anything further, go to top left "File/Save everything"
+This will "lock in" your changes to project settings: if you crash codeblocks without saving settings, the changes will be lost!
+
+You're now ready to "try" to build your first Urho c++ application...
+If we get build errors, we need to fix them before going further.
+If the app builds, I expect it to produce an error message telling us that the app cannot locate the resource folder!
+Should you see this message, make a copy of "UrhoBuild/bin" folder, and paste it in your project folder.
+You get a different error message this time... can't remember exactly what it is, but I know how to proceed.
+
+We need to go to "Project/Properties"...
+Click on "Build targets".
+For both debug and release, change the output filename to "bin/UrhoTest.exe" (for linux, lose the ".exe" extension)
+Also change the "Execution working dir" to simply "bin"
+Close the dialog.
+Go to "File/Save everything"...
+Let's try again... this time, our app should run!
+The "Hello World" application should simply look like a black window.
+If you see a black window, congratulations - our first urho app is working as intended!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
